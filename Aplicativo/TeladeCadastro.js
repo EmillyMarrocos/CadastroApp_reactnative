@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import{ View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import axios from 'axios';
+import { Picker } from '@react-native-picker/picker';
 
-const App = () => {
-  const [nome, setNome] = useState9('');
+const TeladeCadastro = () => {
+  const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [endereco, setEndereco] = useState('');
@@ -16,8 +17,8 @@ const App = () => {
   const buscarEnderecoporCEP = async () => {
     try {
       const response = await axios.get('https://viacep.com.br/ws/${cep}/json');
-        const data = response.data;
-        if (data.erro) {
+      const data = response.data;
+      if (data.erro) {
         Alert.alert('Erro', 'CEP não encontrado');
         return;
       }
@@ -33,73 +34,74 @@ const App = () => {
     <View style={styles.container}>
       <Text style={styles.label}>Nome</Text>
       <TextInput 
-      style={styles.input}
-      value={nome}
-      onChangeText={setNome}
-      placeholder="Digite seu nome"
+        style={styles.input}
+        value={nome}
+        onChangeText={setNome}
+        placeholder="Digite seu nome"
       />
 
       <Text style={styles.label}>Email</Text>
       <TextInput
-      style={styles.input}
-      value={email}
-      onChangeText={setEmail}
-      keyboardType="email-address"
+        style={styles.input}
+        value={email}
+        onChangeText={setEmail}
+        placeholder="Digite seu email"
+        keyboardType="email-address"
       />
 
       <Text style={styles.label}>Senha</Text>
       <TextInput
-      style={styles.input}
-      value={senha}
-      onChangeText={setSenha}
-      placeholder="Digite sua senha"
-      secureTextEntry
+        style={styles.input}
+        value={senha}
+        onChangeText={setSenha}
+        placeholder="Digite sua senha"
+        secureTextEntry
       />
 
       <Text style={styles.label}>CEP</Text>
       <TextInput
-      style={styles.input}
-      value={cep}
-      onChangeText={setCep}
-      placeholder="Digite seu CEP"
-      keyboardType="numeric"
-      onBlur={buscarEnderecoporCEP}
+        style={styles.input}
+        value={cep}
+        onChangeText={setCep}
+        placeholder="Digite seu CEP"
+        keyboardType="numeric"
+        onBlur={buscarEnderecoporCEP}
       />
 
       <Text style={styles.label}>Endereço</Text>
       <TextInput
-      style={styles.input}
-      value={endereco}
-      onChangeText={setEndereco}
-      placeholder="Digite seu endereço"
+        style={styles.input}
+        value={endereco}
+        onChangeText={setEndereco}
+        placeholder="Digite seu endereço"
       />
 
       <Text style={styles.label}>Número</Text>
       <TextInput
-      style={styles.input}
-      value={numero}
-      onChangeText={setNumero}
-      placeholder="Digite o número do endereço"
-      keyboardType="numeric"
+        style={styles.input}
+        value={numero}
+        onChangeText={setNumero}
+        placeholder="Digite o número do endereço"
+        keyboardType="numeric"
       />
 
       <Text style={styles.label}>Complemento</Text>
       <TextInput
-      style={styles.input}
-      value={complemento}
-      onChangeText={setComplemento}
-      placeholder="Digite o complemento"
+        style={styles.input}
+        value={complemento}
+        onChangeText={setComplemento}
+        placeholder="Digite o complemento"
       />
 
       <Text style={styles.label}>Bairro</Text>
       <TextInput
-      style={styles.input}
-      value={bairro}
-      onChangeText={setBairro}
-      placeholder="Digite o bairro"
+        style={styles.input}
+        value={bairro}
+        onChangeText={setBairro}
+        placeholder="Digite o bairro"
       />
 
-<Text style={styles.label}>Estado</Text>
+      <Text style={styles.label}>Estado</Text>
       <Picker
         selectedValue={estado}
         onValueChange={(itemValue) => setEstado(itemValue)}
@@ -135,7 +137,7 @@ const App = () => {
         <Picker.Item label="Tocantins" value="TO" />
       </Picker>
 
-      <Button title="Cadastrar" onPress={() => Alert.alert('Cadastro realizado com sucesso!')}/>
+      <Button title="Cadastrar" onPress={() => Alert.alert('Cadastro realizado com sucesso!')} />
     </View>
   );
 };
@@ -146,13 +148,11 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: "#FFF"
   },
-
   label: {
     fontSize: 16,
     fontWeight: 'bold',
-    marginTop:20
+    marginTop: 20
   },
-
   input: {
     height: 40,
     borderColor: '#DDD',
@@ -161,7 +161,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginTop: 5
   },
-
   picker: {
     height: 50,
     borderColor: '#DDD',
@@ -171,4 +170,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default TeladeCadastro;
